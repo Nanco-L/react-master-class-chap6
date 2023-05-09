@@ -29,8 +29,9 @@ function App() {
     if (destination.droppableId === source.droppableId) {
       // same board movement
       const newToDos = [...toDos[source.droppableId]];
+      const taskObj = newToDos[source.index];
       newToDos.splice(source.index, 1);
-      newToDos.splice(destination.index, 0, draggableId);
+      newToDos.splice(destination.index, 0, taskObj);
       setToDos((prev) => ({
         ...prev,
         [source.droppableId]: newToDos,
@@ -40,9 +41,10 @@ function App() {
     if (destination.droppableId !== source.droppableId) {
       // cross board movement
       const start = [...toDos[source.droppableId]];
+      const taskObj = start[source.index];
       start.splice(source.index, 1);
       const finish = [...toDos[destination.droppableId]];
-      finish.splice(destination.index, 0, draggableId);
+      finish.splice(destination.index, 0, taskObj);
       setToDos((prev) => ({
         ...prev,
         [source.droppableId]: start,
